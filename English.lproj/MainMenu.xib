@@ -1163,12 +1163,16 @@
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<string>WebKitDefaultFixedFontSize</string>
 										<string>WebKitDefaultFontSize</string>
+										<string>WebKitJavaEnabled</string>
+										<string>WebKitJavaScriptEnabled</string>
 										<string>WebKitMinimumFontSize</string>
 									</object>
 									<object class="NSMutableArray" key="dict.values">
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<integer value="12" id="204356446"/>
 										<reference ref="204356446"/>
+										<boolean value="NO" id="6"/>
+										<reference ref="6"/>
 										<integer value="1" id="9"/>
 									</object>
 								</object>
@@ -1186,7 +1190,7 @@
 			<object class="NSCustomObject" id="755631768">
 				<string key="NSClassName">NSFontManager</string>
 			</object>
-			<object class="NSCustomObject" id="1050051754">
+			<object class="NSCustomObject" id="83241822">
 				<string key="NSClassName">MKLevinController</string>
 			</object>
 		</object>
@@ -1724,7 +1728,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">webView</string>
-						<reference key="source" ref="1050051754"/>
+						<reference key="source" ref="83241822"/>
 						<reference key="destination" ref="430760870"/>
 					</object>
 					<int key="connectionID">452</int>
@@ -1733,7 +1737,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="1050"/>
-						<reference key="destination" ref="1050051754"/>
+						<reference key="destination" ref="83241822"/>
 					</object>
 					<int key="connectionID">453</int>
 				</object>
@@ -2644,7 +2648,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">451</int>
-						<reference key="object" ref="1050051754"/>
+						<reference key="object" ref="83241822"/>
 						<reference key="parent" ref="1049"/>
 					</object>
 				</object>
