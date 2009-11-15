@@ -13,6 +13,21 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [[webView mainFrame] loadRequest: [NSURLRequest requestWithURL: [NSURL URLWithString: @"http://www.heise.de"]]];
+    [self collectAllSwfFilesFromDirectory:[[NSBundle mainBundle] bundlePath]];
+    NSURL* swfUrl = [swfFiles lastObject];
+    [[webView mainFrame] loadRequest: [NSURLRequest requestWithURL:swfUrl]];
 }
+
+
+- (void) collectAllSwfFilesFromDirectory:(NSString*)searchDirectory
+{
+    NSDirectoryEnumerator* dirEnum = [[NSFileManager defaultManager] enumeratorAtPath: searchDirectory];
+    NSString* file;
+    swfFiles = [NSMutableArray arrayWithCapacity:10];
+    while ( (file = [dirEnum nextObject]) ) {
+        if ([[file pathExtension] isEqualToString: @"swf"])
+            [swfFiles addObject: [NSURL URLWithString:[searchDirectory stringByAppendingPathComponent:file]]];
+    }
+}
+
 @end

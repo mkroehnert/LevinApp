@@ -11,8 +11,10 @@
 
 @interface MKLevinController : NSObject {
     IBOutlet WebView* webView;
+    NSMutableArray* swfFiles;
 }
 
-- (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
+- (void) applicationDidFinishLaunching:(NSNotification*)aNotification;
+- (void) collectAllSwfFilesFromDirectory:(NSString*)searchDirectory;
 
 @end
