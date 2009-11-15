@@ -11,6 +11,15 @@
 
 @implementation MKLevinController
 
+- (id) init
+{
+    self = [super init];
+    if (self)
+        swfFiles = [NSMutableArray array];
+    return self;
+}
+
+
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self collectAllSwfFilesFromDirectory:[[NSBundle mainBundle] bundlePath]];
@@ -23,7 +32,6 @@
 {
     NSDirectoryEnumerator* dirEnum = [[NSFileManager defaultManager] enumeratorAtPath: searchDirectory];
     NSString* file;
-    swfFiles = [NSMutableArray arrayWithCapacity:10];
     while ( (file = [dirEnum nextObject]) ) {
         if ([[file pathExtension] isEqualToString: @"swf"])
             [swfFiles addObject: [NSURL URLWithString:[searchDirectory stringByAppendingPathComponent:file]]];
