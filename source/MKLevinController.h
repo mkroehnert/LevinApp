@@ -11,6 +11,7 @@
 
 @interface MKLevinController : NSObject {
     IBOutlet WebView* webView;
+    IBOutlet NSArrayController* swfFilesController;
     NSMutableArray* swfFiles;
 }
 

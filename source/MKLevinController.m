@@ -23,8 +23,8 @@
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self collectAllSwfFilesFromDirectory:[[NSBundle mainBundle] bundlePath]];
-    NSURL* swfUrl = [swfFiles lastObject];
-    [[webView mainFrame] loadRequest: [NSURLRequest requestWithURL:swfUrl]];
+    NSString* swfPath = [[swfFilesController selectedObjects] lastObject];
+    [[webView mainFrame] loadRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:swfPath]]];
 }
 
 
@@ -34,7 +34,10 @@
     NSString* file;
     while ( (file = [dirEnum nextObject]) ) {
         if ([[file pathExtension] isEqualToString: @"swf"])
-            [swfFiles addObject: [NSURL URLWithString:[searchDirectory stringByAppendingPathComponent:file]]];
+        {
+            NSLog(@"Found: %@\n", file);
+            [swfFilesController addObject: [searchDirectory stringByAppendingPathComponent:file]];
+        }
     }
 }
 
