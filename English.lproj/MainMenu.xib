@@ -1186,7 +1186,7 @@
 			<object class="NSCustomObject" id="755631768">
 				<string key="NSClassName">NSFontManager</string>
 			</object>
-			<object class="NSCustomObject" id="594033417">
+			<object class="NSCustomObject" id="1050051754">
 				<string key="NSClassName">MKLevinController</string>
 			</object>
 		</object>
@@ -1724,10 +1724,18 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">webView</string>
-						<reference key="source" ref="594033417"/>
+						<reference key="source" ref="1050051754"/>
 						<reference key="destination" ref="430760870"/>
 					</object>
 					<int key="connectionID">452</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="1050"/>
+						<reference key="destination" ref="1050051754"/>
+					</object>
+					<int key="connectionID">453</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2636,7 +2644,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">451</int>
-						<reference key="object" ref="594033417"/>
+						<reference key="object" ref="1050051754"/>
 						<reference key="parent" ref="1049"/>
 					</object>
 				</object>
@@ -3126,7 +3134,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">452</int>
+			<int key="maxID">453</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
