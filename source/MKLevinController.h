@@ -13,4 +13,6 @@
     IBOutlet WebView* webView;
 }
 
+- (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
+
 @end

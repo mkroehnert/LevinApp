@@ -11,4 +11,8 @@
 
 @implementation MKLevinController
 
+- (void) applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    [[webView mainFrame] loadRequest: [NSURLRequest requestWithURL: [NSURL URLWithString: @"http://www.heise.de"]]];
+}
 @end
