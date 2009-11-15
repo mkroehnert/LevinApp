@@ -10,7 +10,7 @@
 
 
 @interface MKLevinController : NSObject {
-
+    IBOutlet WebView* webView;
 }
 
 @end
