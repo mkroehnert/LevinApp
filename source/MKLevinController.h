@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 
+extern NSString* const SWF_FILES_CONTROLLER_KEY;
+
 @interface MKLevinController : NSObject {
     IBOutlet WebView* webView;
     IBOutlet NSArrayController* swfFilesController;
@@ -17,5 +19,6 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification*)aNotification;
 - (void) collectAllSwfFilesFromDirectory:(NSString*)searchDirectory;
+- (void) loadFileAtPathIntoWebView:(NSString*)swfPath;
 
 @end
