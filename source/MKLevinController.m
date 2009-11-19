@@ -70,13 +70,19 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 
 /**
  * Create an NSURLRequest from \p swfPath and load it into the webView.
+ * Remove the \p swfPath from the swfFilesController if it does not exist
+ * and return without trying to load the file.
  *
  * \param swfPath file to load into the webView.
  */
 - (void) loadFileAtPathIntoWebView:(NSString*)swfPath
 {
     NSLog(@"Loading: %@\n", swfPath);
-    // TODO: handle not existent path
+    if (! [[NSFileManager defaultManager] fileExistsAtPath:swfPath])
+    {
+        [swfFilesController removeObject:swfPath];
+        return;
+    }
     [[webView mainFrame] loadRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:swfPath]]];
 }
 
