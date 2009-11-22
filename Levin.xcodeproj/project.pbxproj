@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		4DA93B7510B8BAEA0022DB7B /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DA93B7310B8BAEA0022DB7B /* Preferences.xib */; };
 		4DB32C5910B063FC0010E22E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB32C5810B063FC0010E22E /* WebKit.framework */; };
 		4DB32C6210B0659A0010E22E /* MKLevinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB32C6110B0659A0010E22E /* MKLevinController.m */; };
 		4DC9131C10B60D360032C807 /* MKPathTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC9131B10B60D360032C807 /* MKPathTransformer.m */; };
@@ -25,6 +26,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* Levin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Levin_Prefix.pch; sourceTree = "<group>"; };
+		4DA93B7410B8BAEA0022DB7B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
 		4DB32C5810B063FC0010E22E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		4DB32C6010B0659A0010E22E /* MKLevinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKLevinController.h; path = source/MKLevinController.h; sourceTree = "<group>"; };
 		4DB32C6110B0659A0010E22E /* MKLevinController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKLevinController.m; path = source/MKLevinController.m; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				4DA93B7310B8BAEA0022DB7B /* Preferences.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				4DA93B7510B8BAEA0022DB7B /* Preferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +207,14 @@
 				1DDD58150DA1D0A300B32029 /* English */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		4DA93B7310B8BAEA0022DB7B /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4DA93B7410B8BAEA0022DB7B /* English */,
+			);
+			name = Preferences.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
