@@ -21,7 +21,10 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 {
     self = [super init];
     if (self)
+    {
         swfFiles = [NSMutableArray arrayWithCapacity:10];
+        selectedScanPath = @"";
+    }
 
     return self;
 }
@@ -43,7 +46,8 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
  */
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self collectAllSwfFilesFromDirectory:[[NSBundle mainBundle] bundlePath]];
+    [self promptForScanpath];
+    [self collectAllSwfFilesFromDirectory:selectedScanPath];
     [swfFilesController addObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
 }
 
@@ -58,7 +62,8 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 {
     NSDirectoryEnumerator* dirEnum = [[NSFileManager defaultManager] enumeratorAtPath: searchDirectory];
     NSString* file;
-    while ( (file = [dirEnum nextObject]) ) {
+    while ( (file = [dirEnum nextObject]) )
+    {
         if ([[file pathExtension] isEqualToString: @"swf"])
         {
             NSLog(@"Found: %@\n", file);
@@ -88,13 +93,57 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 
 
 /**
+ * Show an NSOpenPanel sheet to select the directory to scan.
+ */
+- (void) promptForScanpath
+{
+    NSOpenPanel* scanpathPanel = [NSOpenPanel openPanel];
+    
+    [scanpathPanel setCanChooseFiles:NO];
+    [scanpathPanel setCanChooseDirectories:YES];
+    [scanpathPanel setAllowsMultipleSelection:NO];
+    [scanpathPanel setDirectory:NSHomeDirectory()];
+    [scanpathPanel setPrompt:@"Scan Directory"];
+    [scanpathPanel setTitle:@"Select directory to scan"];
+
+    [scanpathPanel beginSheetForDirectory:nil
+                                     file:nil
+                           modalForWindow:mainWindow
+                            modalDelegate:self
+                           didEndSelector:@selector(filePanelDidEnd:returnCode:contextInfo:)
+                              contextInfo:nil];
+    
+    [NSApp runModalForWindow:scanpathPanel];
+    [NSApp endSheet:scanpathPanel];
+}
+
+
+/**
+ * Delegat selector to handle the actions from the NSOpenPanel sheet.
+ * Stores the selected directory in selectedScanPath if the OK button has been pressed.
+ */
+- (void) filePanelDidEnd:(NSOpenPanel*)sheet
+              returnCode:(int)returnCode
+             contextInfo:(void*)contextInfo
+{
+    [selectedScanPath release];
+    if (NSOKButton == returnCode)
+        selectedScanPath = [[sheet directory] retain];
+    else
+        selectedScanPath = @"";
+    
+    [NSApp stopModalWithCode:returnCode];
+}
+
+
+/**
  * Call loadFileAtPathIntoWebView with the current selection of the swfFilesController
  * if the object is notified with an SWF_FILES_CONTROLLER_KEY keyPath.
  */
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
 {
     if ([keyPath isEqual:SWF_FILES_CONTROLLER_KEY])
     {
