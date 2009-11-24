@@ -14,6 +14,7 @@ extern NSString* const SWF_FILES_CONTROLLER_KEY;
 @interface MKLevinController : NSObject {
     IBOutlet WebView* webView;
     IBOutlet NSArrayController* swfFilesController;
+    IBOutlet NSArrayController* scanPathController;
     IBOutlet NSWindow* mainWindow;
     NSMutableArray* swfFiles;
     NSString* selectedScanPath;

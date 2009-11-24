@@ -13,7 +13,6 @@
 
 NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 
-
 /**
  *
  */
@@ -46,8 +45,13 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
  */
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self promptForScanpath];
-    [self collectAllSwfFilesFromDirectory:selectedScanPath];
+    if (0 == [[scanPathController arrangedObjects] count])
+    {
+        [self promptForScanpath];
+        if (0 != [selectedScanPath length])
+            [scanPathController addObject:selectedScanPath];
+    }
+    [self collectAllSwfFilesFromDirectory:[[scanPathController arrangedObjects] lastObject]];
     [swfFilesController addObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
 }
 
@@ -64,7 +68,8 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
     NSString* file;
     while ( (file = [dirEnum nextObject]) )
     {
-        if ([[file pathExtension] isEqualToString: @"swf"])
+//        if ([[[file pathExtension] lowercaseString] isEqualToString: @"swf"])
+        if ([[[file pathExtension] lowercaseString] isEqualToString: @"swf"])
         {
             NSLog(@"Found: %@\n", file);
             [swfFilesController addObject: [searchDirectory stringByAppendingPathComponent:file]];
