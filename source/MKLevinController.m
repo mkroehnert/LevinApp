@@ -68,7 +68,6 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
     NSString* file;
     while ( (file = [dirEnum nextObject]) )
     {
-//        if ([[[file pathExtension] lowercaseString] isEqualToString: @"swf"])
         if ([[[file pathExtension] lowercaseString] isEqualToString: @"swf"])
         {
             NSLog(@"Found: %@\n", file);
