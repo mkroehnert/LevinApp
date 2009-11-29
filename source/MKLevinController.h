@@ -18,7 +18,6 @@ extern NSString* const SWF_FILES_CONTROLLER_KEY;
     IBOutlet NSWindow* mainWindow;
     IBOutlet NSPanel* preferencesPanel;
     NSMutableArray* swfFiles;
-    NSString* selectedScanPath;
 }
 
 - (IBAction) showPreferences:(id)sender;

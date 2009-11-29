@@ -22,7 +22,6 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
     if (self)
     {
         swfFiles = [NSMutableArray arrayWithCapacity:10];
-        selectedScanPath = @"";
     }
 
     return self;
@@ -56,14 +55,13 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 /**
  * Retrieve all swf files from specified directory and add self to the observer list
  * of swfFilesController.
+ * Also prompt for a path to scan for swf files if none is stored in the userdefaults.
  */
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     if (0 == [[scanPathController arrangedObjects] count])
     {
         [self promptForScanpath];
-        if (0 != [selectedScanPath length])
-            [scanPathController addObject:selectedScanPath];
     }
     [self collectAllSwfFilesFromDirectory:[[scanPathController arrangedObjects] lastObject]];
     [swfFilesController addObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
@@ -138,17 +136,20 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 
 /**
  * Delegat selector to handle the actions from the NSOpenPanel sheet.
- * Stores the selected directory in selectedScanPath if the OK button has been pressed.
+ * Stores the selected directory in the arraycontroller if the OK button has been pressed
+ * and the pathname is not empty.
  */
 - (void) filePanelDidEnd:(NSOpenPanel*)sheet
               returnCode:(int)returnCode
              contextInfo:(void*)contextInfo
 {
-    [selectedScanPath release];
+    NSString* selectedScanPath = @"";
+
     if (NSOKButton == returnCode)
-        selectedScanPath = [[sheet directory] retain];
-    else
-        selectedScanPath = @"";
+        selectedScanPath = [sheet directory];
+    
+    if (0 != [selectedScanPath length])
+        [scanPathController addObject:selectedScanPath];
     
     [NSApp stopModalWithCode:returnCode];
 }
