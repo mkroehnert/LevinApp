@@ -60,10 +60,14 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     if (0 == [[scanPathController arrangedObjects] count])
-    {
         [self promptForScanpath:nil];
+
+    NSEnumerator* scanPathEnumerator = [[scanPathController arrangedObjects] objectEnumerator];
+    id scanPath;
+    while ((scanPath = [scanPathEnumerator nextObject]))
+    {
+        [self collectAllSwfFilesFromDirectory:scanPath];
     }
-    [self collectAllSwfFilesFromDirectory:[[scanPathController arrangedObjects] lastObject]];
     [swfFilesController addObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
 }
 
