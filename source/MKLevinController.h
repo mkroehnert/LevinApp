@@ -21,11 +21,11 @@ extern NSString* const SWF_FILES_CONTROLLER_KEY;
 }
 
 - (IBAction) showPreferences:(id)sender;
+- (IBAction) promptForScanpath:(id)sender;
 
 - (void) applicationDidFinishLaunching:(NSNotification*)aNotification;
 - (void) collectAllSwfFilesFromDirectory:(NSString*)searchDirectory;
 - (void) loadFileAtPathIntoWebView:(NSString*)swfPath;
-- (void) promptForScanpath;
 - (void) filePanelDidEnd:(NSOpenPanel*)sheet returnCode:(int)returnCode contextInfo:(void*)contextInfo;
 
 @end

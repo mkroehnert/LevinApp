@@ -61,7 +61,7 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 {
     if (0 == [[scanPathController arrangedObjects] count])
     {
-        [self promptForScanpath];
+        [self promptForScanpath:nil];
     }
     [self collectAllSwfFilesFromDirectory:[[scanPathController arrangedObjects] lastObject]];
     [swfFilesController addObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
@@ -111,7 +111,7 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 /**
  * Show an NSOpenPanel sheet to select the directory to scan.
  */
-- (void) promptForScanpath
+- (IBAction) promptForScanpath:(id)sender
 {
     NSOpenPanel* scanpathPanel = [NSOpenPanel openPanel];
     
