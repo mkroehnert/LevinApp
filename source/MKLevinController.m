@@ -46,9 +46,7 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
     [NSBundle loadNibNamed:@"Preferences" owner:self];
     
     if ((nil != preferencesPanel))
-    {
         [preferencesPanel makeKeyAndOrderFront:sender];
-    }
 }
 
 
