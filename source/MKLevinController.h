@@ -16,9 +16,12 @@ extern NSString* const SWF_FILES_CONTROLLER_KEY;
     IBOutlet NSArrayController* swfFilesController;
     IBOutlet NSArrayController* scanPathController;
     IBOutlet NSWindow* mainWindow;
+    IBOutlet NSPanel* preferencesPanel;
     NSMutableArray* swfFiles;
     NSString* selectedScanPath;
 }
+
+- (IBAction) showPreferences:(id)sender;
 
 - (void) applicationDidFinishLaunching:(NSNotification*)aNotification;
 - (void) collectAllSwfFilesFromDirectory:(NSString*)searchDirectory;

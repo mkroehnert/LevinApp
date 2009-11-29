@@ -81,7 +81,7 @@
 											<object class="NSMutableArray" key="NSTableColumns">
 												<bool key="EncodedWithXMLCoder">YES</bool>
 												<object class="NSTableColumn" id="424690881">
-													<double key="NSWidth">1.010000e+02</double>
+													<double key="NSWidth">4.000000e+01</double>
 													<double key="NSMinWidth">4.000000e+01</double>
 													<double key="NSMaxWidth">1.000000e+03</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -139,7 +139,7 @@
 													<reference key="NSTableView" ref="971929912"/>
 												</object>
 												<object class="NSTableColumn" id="403478229">
-													<double key="NSWidth">2.660000e+02</double>
+													<double key="NSWidth">3.270000e+02</double>
 													<double key="NSMinWidth">4.000000e+01</double>
 													<double key="NSMaxWidth">1.000000e+03</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -369,11 +369,20 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
-			<object class="NSUserDefaultsController" id="1072529131">
+			<object class="NSUserDefaultsController" id="135442204">
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
-			<object class="NSArrayController" id="431119087">
-				<string key="NSObjectClassName">NSString</string>
+			<object class="NSArrayController" id="179956499">
+				<object class="NSMutableArray" key="NSDeclaredKeys">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+					<object class="NSMutableString">
+						<characters key="NS.bytes">scanPaths.description</characters>
+					</object>
+					<string>description</string>
+					<object class="NSMutableString">
+						<characters key="NS.bytes">selection.description</characters>
+					</object>
+				</object>
 				<bool key="NSEditable">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
@@ -387,36 +396,44 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<object class="NSMutableArray" key="connectionRecords">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">preferencesPanel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1005"/>
+					</object>
+					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">contentArray: values.scanPaths</string>
-						<reference key="source" ref="431119087"/>
-						<reference key="destination" ref="1072529131"/>
+						<reference key="source" ref="179956499"/>
+						<reference key="destination" ref="135442204"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="431119087"/>
-							<reference key="NSDestination" ref="1072529131"/>
+							<reference key="NSSource" ref="179956499"/>
+							<reference key="NSDestination" ref="135442204"/>
 							<string key="NSLabel">contentArray: values.scanPaths</string>
 							<string key="NSBinding">contentArray</string>
 							<string key="NSKeyPath">values.scanPaths</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">30</int>
+					<int key="connectionID">51</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects</string>
+						<string key="label">value: arrangedObjects.description</string>
 						<reference key="source" ref="403478229"/>
-						<reference key="destination" ref="431119087"/>
+						<reference key="destination" ref="179956499"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="403478229"/>
-							<reference key="NSDestination" ref="431119087"/>
-							<string key="NSLabel">value: arrangedObjects</string>
+							<reference key="NSDestination" ref="179956499"/>
+							<string key="NSLabel">value: arrangedObjects.description</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects</string>
+							<string key="NSKeyPath">arrangedObjects.description</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">32</int>
+					<int key="connectionID">63</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -577,15 +594,14 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="parent" ref="870397960"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="1072529131"/>
+						<int key="objectID">45</int>
+						<reference key="object" ref="135442204"/>
 						<reference key="parent" ref="1002"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">28</int>
-						<reference key="object" ref="431119087"/>
+						<int key="objectID">49</int>
+						<reference key="object" ref="179956499"/>
 						<reference key="parent" ref="1002"/>
-						<string key="objectName">scanPathController</string>
 					</object>
 				</object>
 			</object>
@@ -615,7 +631,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>2.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
-					<string>28.IBPluginDependency</string>
+					<string>49.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -625,9 +641,9 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilderKit</string>
 					<string>com.apple.InterfaceBuilderKit</string>
-					<string>{{343, 583}, {430, 262}}</string>
+					<string>{{344, 583}, {430, 262}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{343, 583}, {430, 262}}</string>
+					<string>{{344, 583}, {430, 262}}</string>
 					<integer value="1"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>
@@ -670,7 +686,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">33</int>
+			<int key="maxID">63</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -687,6 +703,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>mainWindow</string>
+							<string>preferencesPanel</string>
 							<string>scanPathController</string>
 							<string>swfFilesController</string>
 							<string>webView</string>
@@ -694,6 +711,7 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSWindow</string>
+							<string>NSPanel</string>
 							<string>NSArrayController</string>
 							<string>NSArrayController</string>
 							<string>WebView</string>

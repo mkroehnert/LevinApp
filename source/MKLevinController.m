@@ -40,6 +40,21 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 
 
 /**
+ *
+ */
+- (IBAction) showPreferences:(id)sender
+{
+    if ((nil == preferencesPanel))
+        [NSBundle loadNibNamed:@"Preferences" owner:self];
+    
+    if ((nil != preferencesPanel))
+    {
+        [preferencesPanel makeKeyAndOrderFront:sender];
+    }
+}
+
+
+/**
  * Retrieve all swf files from specified directory and add self to the observer list
  * of swfFilesController.
  */
