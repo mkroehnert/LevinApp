@@ -12,6 +12,8 @@
 @implementation MKLevinController
 
 NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
+NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
+
 
 /**
  *
@@ -22,6 +24,7 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
     if (self)
     {
         swfFiles = [NSMutableArray arrayWithCapacity:10];
+        oldUserdefaultsScanPaths = nil;
     }
 
     return self;
@@ -29,17 +32,20 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 
 
 /**
- * Remove self from the swfFilesController observer list.
+ * Remove self from the swfFilesController observer list
+ * and also remove self from the scanPathController observer list.
  */
 - (void) dealloc
 {
     [swfFilesController removeObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY];
+    [scanPathController removeObserver:self forKeyPath:SCAN_PATH_CONTROLLER_KEY];
+    [oldUserdefaultsScanPaths release];
     [super dealloc];
 }
 
 
 /**
- *
+ * Load the Preferences.nib and make it the frontmost window.
  */
 - (IBAction) showPreferences:(id)sender
 {
@@ -51,20 +57,26 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 
 
 /**
- * Retrieve all swf files from specified directory and add self to the observer list
- * of swfFilesController.
- * Also prompt for a path to scan for swf files if none is stored in the userdefaults.
+ * Add self to the observer list of the scanPathController and swfFilesController.
+ * Create a copy of the scanPathControllers content and prompt for a directory
+ * to scan if no scanPaths have been stored.
+ * Scan all directories if there are some entries in the scanPaths userdefaults
  */
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [scanPathController addObserver:self forKeyPath:SCAN_PATH_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
+    oldUserdefaultsScanPaths = [[scanPathController content] mutableCopy];
+    
     if (0 == [[scanPathController arrangedObjects] count])
         [self promptForScanpath:nil];
-
-    NSEnumerator* scanPathEnumerator = [[scanPathController arrangedObjects] objectEnumerator];
-    id scanPath;
-    while ((scanPath = [scanPathEnumerator nextObject]))
+    else
     {
-        [self collectAllSwfFilesFromDirectory:scanPath];
+        NSEnumerator* scanPathEnumerator = [[scanPathController arrangedObjects] objectEnumerator];
+        id scanPath;
+        while ((scanPath = [scanPathEnumerator nextObject]))
+        {
+            [self collectAllSwfFilesFromDirectory:scanPath];
+        }
     }
     [swfFilesController addObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
 }
@@ -159,18 +171,45 @@ NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 
 /**
  * Call loadFileAtPathIntoWebView with the current selection of the swfFilesController
- * if the object is notified with an SWF_FILES_CONTROLLER_KEY keyPath.
+ * if the object is notified with an SWF_FILES_CONTROLLER_KEY \p keyPath and \p object
+ * is the swfFilesController.
+ * If \p keyPath is SCAN_PATH_CONTROLLER_KEY and the object is the scanPathController
+ * then compare the size of the scanPathControllers content and the copy stored in
+ * oldUserdefaultsScanPaths (necessary because no other notification than NSKeyValueChangeSetting
+ * is returned in the change dictionary).
+ * If the old size is smaller than the new one, scan the added directory for swfFiles
+ * otherwise a directory has been removed.
+ * Afterwards create a copy of teh new userdefaults array.
  */
 - (void) observeValueForKeyPath:(NSString *)keyPath
                        ofObject:(id)object
                          change:(NSDictionary *)change
                         context:(void *)context
 {
-    if ([keyPath isEqual:SWF_FILES_CONTROLLER_KEY])
+    if ([keyPath isEqual:SWF_FILES_CONTROLLER_KEY] && (object == swfFilesController))
     {
         [self loadFileAtPathIntoWebView:[[swfFilesController selectedObjects] lastObject]];
     }
-    // Don't send to super!!!
+    else if([keyPath isEqual:SCAN_PATH_CONTROLLER_KEY] && (object == scanPathController))
+    {
+        NSMutableArray* userdefaultsScanPaths = [[scanPathController content] mutableCopy];
+        if ([oldUserdefaultsScanPaths count] > [userdefaultsScanPaths count])
+        {
+            [oldUserdefaultsScanPaths removeObjectsInArray:userdefaultsScanPaths];
+            NSLog(@"Removed path: %@", [oldUserdefaultsScanPaths lastObject]);
+        }
+        else
+        {
+            [userdefaultsScanPaths removeObjectsInArray:oldUserdefaultsScanPaths];
+            NSLog(@"Added scan Path:%@", [userdefaultsScanPaths lastObject]);
+            [self collectAllSwfFilesFromDirectory: [userdefaultsScanPaths lastObject]];
+        }
+        [oldUserdefaultsScanPaths release];
+        oldUserdefaultsScanPaths = [[scanPathController content] mutableCopy];
+        [userdefaultsScanPaths release];
+    }
+    else
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 @end

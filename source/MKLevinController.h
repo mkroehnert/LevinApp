@@ -10,14 +10,17 @@
 
 
 extern NSString* const SWF_FILES_CONTROLLER_KEY;
+extern NSString* const SCAN_PATH_CONTROLLER_KEY;
 
-@interface MKLevinController : NSObject {
+@interface MKLevinController : NSObject
+{
     IBOutlet WebView* webView;
     IBOutlet NSArrayController* swfFilesController;
     IBOutlet NSArrayController* scanPathController;
     IBOutlet NSWindow* mainWindow;
     IBOutlet NSPanel* preferencesPanel;
     NSMutableArray* swfFiles;
+    NSMutableArray* oldUserdefaultsScanPaths;
 }
 
 - (IBAction) showPreferences:(id)sender;
