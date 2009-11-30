@@ -188,7 +188,8 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
 {
     if ([keyPath isEqual:SWF_FILES_CONTROLLER_KEY] && (object == swfFilesController))
     {
-        [self loadFileAtPathIntoWebView:[[swfFilesController selectedObjects] lastObject]];
+        if (0 < [[swfFilesController selectedObjects] count])
+            [self loadFileAtPathIntoWebView:[[swfFilesController selectedObjects] lastObject]];
     }
     else if([keyPath isEqual:SCAN_PATH_CONTROLLER_KEY] && (object == scanPathController))
     {
