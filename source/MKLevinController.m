@@ -81,6 +81,7 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [scanPathController addObserver:self forKeyPath:SCAN_PATH_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
+    [oldUserdefaultsScanPaths release];
     oldUserdefaultsScanPaths = [[scanPathController content] mutableCopy];
     
     if (0 == [[scanPathController arrangedObjects] count])
