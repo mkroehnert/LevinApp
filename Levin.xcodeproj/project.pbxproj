@@ -10,6 +10,7 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		4D52032010C3217000A70DC6 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D52031F10C3217000A70DC6 /* README.txt */; };
 		4D77EB6310CF19F4002DF352 /* NSStringLevinAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D77EB6210CF19F4002DF352 /* NSStringLevinAdditions.m */; };
+		4D77EB7C10CF2388002DF352 /* WebViewLevinAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D77EB7B10CF2388002DF352 /* WebViewLevinAdditions.m */; };
 		4D7871E710C9CEBA0005A2C1 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D7871E610C9CEBA0005A2C1 /* License.txt */; };
 		4D79A10410C446AD00A62203 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4D79A10310C446AD00A62203 /* Credits.rtf */; };
 		4DA93B7510B8BAEA0022DB7B /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DA93B7310B8BAEA0022DB7B /* Preferences.xib */; };
@@ -33,6 +34,8 @@
 		4D52031F10C3217000A70DC6 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		4D77EB6110CF19F4002DF352 /* NSStringLevinAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringLevinAdditions.h; path = source/NSStringLevinAdditions.h; sourceTree = "<group>"; };
 		4D77EB6210CF19F4002DF352 /* NSStringLevinAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringLevinAdditions.m; path = source/NSStringLevinAdditions.m; sourceTree = "<group>"; };
+		4D77EB7A10CF2388002DF352 /* WebViewLevinAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewLevinAdditions.h; path = source/WebViewLevinAdditions.h; sourceTree = "<group>"; };
+		4D77EB7B10CF2388002DF352 /* WebViewLevinAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewLevinAdditions.m; path = source/WebViewLevinAdditions.m; sourceTree = "<group>"; };
 		4D7871E610C9CEBA0005A2C1 /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		4D79A10310C446AD00A62203 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		4DA93B7410B8BAEA0022DB7B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
@@ -67,6 +70,8 @@
 				4DC9131B10B60D360032C807 /* MKPathTransformer.m */,
 				4D77EB6110CF19F4002DF352 /* NSStringLevinAdditions.h */,
 				4D77EB6210CF19F4002DF352 /* NSStringLevinAdditions.m */,
+				4D77EB7A10CF2388002DF352 /* WebViewLevinAdditions.h */,
+				4D77EB7B10CF2388002DF352 /* WebViewLevinAdditions.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 				4DB32C6210B0659A0010E22E /* MKLevinController.m in Sources */,
 				4DC9131C10B60D360032C807 /* MKPathTransformer.m in Sources */,
 				4D77EB6310CF19F4002DF352 /* NSStringLevinAdditions.m in Sources */,
+				4D77EB7C10CF2388002DF352 /* WebViewLevinAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
