@@ -23,6 +23,7 @@
  */
 
 #import "MKLevinController.h"
+#import "NSStringLevinAdditions.h"
 
 
 @implementation MKLevinController
@@ -87,36 +88,9 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
     if (0 == [[scanPathController arrangedObjects] count])
         [self promptForScanpath:nil];
     else
-    {
-        NSEnumerator* scanPathEnumerator = [[scanPathController arrangedObjects] objectEnumerator];
-        id scanPath;
-        while ((scanPath = [scanPathEnumerator nextObject]))
-        {
-            [self collectAllSwfFilesFromDirectory:scanPath];
-        }
-    }
+        [[scanPathController arrangedObjects] makeObjectsPerformSelector:@selector(addDetectedSwfFilesToArrayController:) withObject:swfFilesController];
+
     [swfFilesController addObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
-}
-
-
-/**
- * Scan through \p searchDirectory and add all swf files found to the swfFiles array
- * through the swfFilesController
- *
- * \param searchDirectory directory in which to search for swf files
- */
-- (void) collectAllSwfFilesFromDirectory:(NSString*)searchDirectory
-{
-    NSDirectoryEnumerator* dirEnum = [[NSFileManager defaultManager] enumeratorAtPath: searchDirectory];
-    NSString* file;
-    while ( (file = [dirEnum nextObject]) )
-    {
-        if ([[[file pathExtension] lowercaseString] isEqualToString: @"swf"])
-        {
-            NSLog(@"Found: %@\n", file);
-            [swfFilesController addObject: [searchDirectory stringByAppendingPathComponent:file]];
-        }
-    }
 }
 
 
@@ -213,14 +187,16 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
         NSMutableArray* userdefaultsScanPaths = [[scanPathController content] mutableCopy];
         if ([oldUserdefaultsScanPaths count] > [userdefaultsScanPaths count])
         {
+            // calculate the difference between old and new array
             [oldUserdefaultsScanPaths removeObjectsInArray:userdefaultsScanPaths];
             NSLog(@"Removed path: %@", [oldUserdefaultsScanPaths lastObject]);
         }
         else
         {
+            // calculate the difference between old and new array
             [userdefaultsScanPaths removeObjectsInArray:oldUserdefaultsScanPaths];
             NSLog(@"Added scan Path:%@", [userdefaultsScanPaths lastObject]);
-            [self collectAllSwfFilesFromDirectory: [userdefaultsScanPaths lastObject]];
+            [[userdefaultsScanPaths lastObject] addDetectedSwfFilesToArrayController:swfFilesController];
         }
         [oldUserdefaultsScanPaths release];
         oldUserdefaultsScanPaths = [[scanPathController content] mutableCopy];
