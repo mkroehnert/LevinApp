@@ -43,7 +43,6 @@ extern NSString* const SCAN_PATH_CONTROLLER_KEY;
 - (IBAction) promptForScanpath:(id)sender;
 
 - (void) applicationDidFinishLaunching:(NSNotification*)aNotification;
-- (void) loadFileAtPathIntoWebView:(NSString*)swfPath;
 - (void) filePanelDidEnd:(NSOpenPanel*)sheet returnCode:(int)returnCode contextInfo:(void*)contextInfo;
 
 @end

@@ -24,6 +24,7 @@
 
 #import "MKLevinController.h"
 #import "NSStringLevinAdditions.h"
+#import "WebViewLevinAdditions.h"
 
 
 @implementation MKLevinController
@@ -95,25 +96,6 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
 
 
 /**
- * Create an NSURLRequest from \p swfPath and load it into the webView.
- * Remove the \p swfPath from the swfFilesController if it does not exist
- * and return without trying to load the file.
- *
- * \param swfPath file to load into the webView.
- */
-- (void) loadFileAtPathIntoWebView:(NSString*)swfPath
-{
-    NSLog(@"Loading: %@\n", swfPath);
-    if (! [[NSFileManager defaultManager] fileExistsAtPath:swfPath])
-    {
-        [swfFilesController removeObject:swfPath];
-        return;
-    }
-    [[webView mainFrame] loadRequest: [NSURLRequest requestWithURL:[NSURL URLWithString:swfPath]]];
-}
-
-
-/**
  * Show an NSOpenPanel sheet to select the directory to scan.
  */
 - (IBAction) promptForScanpath:(id)sender
@@ -161,16 +143,17 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
 
 
 /**
- * Call loadFileAtPathIntoWebView with the current selection of the swfFilesController
+ * Call loadFileAtPath: on the webView with the current selection of the swfFilesController
  * if the object is notified with an SWF_FILES_CONTROLLER_KEY \p keyPath and \p object
- * is the swfFilesController.
+ * is the swfFilesController. Remove the path from the swfFilesController if it could not be loaded.
+ *
  * If \p keyPath is SCAN_PATH_CONTROLLER_KEY and the object is the scanPathController
  * then compare the size of the scanPathControllers content and the copy stored in
  * oldUserdefaultsScanPaths (necessary because no other notification than NSKeyValueChangeSetting
  * is returned in the change dictionary).
  * If the old size is smaller than the new one, scan the added directory for swfFiles
  * otherwise a directory has been removed.
- * Afterwards create a copy of teh new userdefaults array.
+ * Afterwards create a copy of the new userdefaults array.
  */
 - (void) observeValueForKeyPath:(NSString *)keyPath
                        ofObject:(id)object
@@ -180,7 +163,11 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
     if ([keyPath isEqual:SWF_FILES_CONTROLLER_KEY] && (object == swfFilesController))
     {
         if (0 < [[swfFilesController selectedObjects] count])
-            [self loadFileAtPathIntoWebView:[[swfFilesController selectedObjects] lastObject]];
+        {
+            id selectedSwfFile = [[swfFilesController selectedObjects] lastObject];
+            if (![webView loadFileAtPath:selectedSwfFile])
+                [swfFilesController removeObject:selectedSwfFile];
+        }
     }
     else if([keyPath isEqual:SCAN_PATH_CONTROLLER_KEY] && (object == scanPathController))
     {
