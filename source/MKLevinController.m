@@ -31,6 +31,7 @@
 
 NSString* const SWF_FILES_CONTROLLER_KEY = @"selection";
 NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
+NSString* const USERDEFAULTS_LAST_OPEN_FILE = @"lastOpenFile";
 
 
 /**
@@ -78,11 +79,13 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
  * Add self to the observer list of the scanPathController and swfFilesController.
  * Create a copy of the scanPathControllers content and prompt for a directory
  * to scan if no scanPaths have been stored.
- * Scan all directories if there are some entries in the scanPaths userdefaults
+ * Scan all directories if there are some entries in the scanPaths userdefaults.
+ * Finally select the file which was open at the last launch.
  */
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [scanPathController addObserver:self forKeyPath:SCAN_PATH_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
+    // make a copy for later comparison in observerValueForKeyPath:ofObject:change:context:
     [oldUserdefaultsScanPaths release];
     oldUserdefaultsScanPaths = [[scanPathController content] mutableCopy];
     
@@ -92,6 +95,19 @@ NSString* const SCAN_PATH_CONTROLLER_KEY = @"content";
         [[scanPathController arrangedObjects] makeObjectsPerformSelector:@selector(addDetectedSwfFilesToArrayController:) withObject:swfFilesController];
 
     [swfFilesController addObserver:self forKeyPath:SWF_FILES_CONTROLLER_KEY options:NSKeyValueObservingOptionNew context:nil];
+    // select last opened file and trigger a change notification to load the file
+    NSString* lastOpenFile = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULTS_LAST_OPEN_FILE];
+    if (0 < [lastOpenFile length])
+        [swfFilesController setSelectedObjects:[NSArray arrayWithObject:lastOpenFile]];
+}
+
+
+/**
+ * Store the last selected swf file in the userdefaults
+ */
+- (void) applicationWillTerminate:(NSNotification *)aNotification
+{
+    [[NSUserDefaults standardUserDefaults] setObject: [[swfFilesController selectedObjects] lastObject] forKey:USERDEFAULTS_LAST_OPEN_FILE];
 }
 
 
